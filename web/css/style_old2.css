@@ -1,0 +1,46 @@
+body{margin:0px; padding:0px; background:#eee; font-family:Arial, Helvetica,
+sans-serif; font-size:12px; color:#000;}
+
+#main-wraper{width:"60%"; margin:0 auto; padding:10px;float:center;}
+
+#top-wraper{width:"60%"; float:center;} */
+
+#banner{width:"60%"; float:center;} 
+
+#nav{width:"60%"; float:center; background:url(../images/navMenuBkgd.jpg) top repeat-x;height:40px;}
+
+#nav ul{width:"20%"; margin:0px; padding:0px; list-style-type:none; display: inline;float:center;} */
+
+#nav ul li{float:center; line-height:40px; text-align:center; 
+font-family:Verdana,"Times New Roman",Times,serif; font-size:24px;
+color:#000; text-decoration:none;}
+
+#nav ul li a{float:center; line-height:40px; text-align:center; 
+font-family:Verdana,"Times New Roman",Times,serif; font-size:24px;
+color:#000; text-decoration:none; padding:0px 118px 0px 119px;}
+
+#nav ul li a:hover{float:center; line-height:40px;text-align:center;
+font-family:Verdana,"Times New Roman",Times,serif; font-size:24px;
+color:#000;text-decoration:none; padding:0px 118px 0px 119px;
+background:url(../images/navMenuBkgdHover.jpg) top repeat-x;}
+
+#wraper{width:"78%"; float:center; background:#fff; padding:20px 10px;
+        font-family:Verdana,"Times New Roman",Times,serif; font-size:18px;}
+
+/*  trying to set the link style here .... */
+#wrapper a{color: #000;text-decoration:none;}
+        
+#footer{width:900px; float:left; background:url(../images/navMenuBkgd.jpg) top repeat-x;
+height:30px;}
+
+#footer ul{margin:0px; padding:0px; list-style-type:none; display: inline;
+float:left;}
+
+#footer ul li{float:left; line-height:30px; text-align:center; 
+font-family:Verdana,"Times New Roman",Times,serif; font-size:13px;
+color:#000; text-decoration:none; padding:0px 640px 0px 5px;}
+
+#footer ul li a{float:left; line-height:30px; text-align:center; 
+font-family:Verdana,"Times New Roman",Times,serif; font-size:13px;
+color:#000; text-decoration:none; padding:0px;}
+

@@ -1,0 +1,151 @@
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <title>Beta Robots - reem@IRI</title>
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="main-wrapper">
+<div id="top-wrapper">
+
+<br>
+<div id="banner"> 
+<a href="../index.html"><img style="width: 900px; height: 130px;" alt="Beta Robots logo" src="images/br-header.jpg"></a>
+</div>
+
+<div id="nav">
+<ul>
+      <li><a href="services.html">services</a></li>
+      <li><a href="projects.html">projects</a></li>
+      <li><a href="software.html">software</a></li>
+      <li><a href="people.html">people</a></li>
+      <li><a href="links.html">links</a></li>
+</ul>
+</div>
+
+<div id="wrapper">
+<br>
+<br>
+<b>REEM@IRI</b>
+<br>
+<br>
+<b>Starting date: </b> January '12
+<br>
+<b>Closing date: </b> September '14
+<br>
+<b>Main Partners: </b> <a href="http://www.pal-robotics.com/" target="_blank"><b>PAL-robotics</b></a> and 
+<a href="http://www.iri.upc.edu/" target="_blank"><b>IRI</b></a>. Beta Robots acted as an individual collaborator. 
+<br>
+<b>Target applications: </b> Home robotics, mobile robotics, social robotics, service robotics.
+<br>
+<br>
+Started in 2012 as a joint initiative between 
+<a href="http://www.pal-robotics.com/" target="_blank"><b>PAL-robotics</b></a>
+and 
+<a href="http://www.iri.upc.edu/" target="_blank"><b>IRI</b></a>
+to participate at robocup@home2013.       
+Afterwards, Beta Robots collaboration continued with PAL-robotics to develop a real-time, multi-target people tracker, based on a particle filter which fuses data from several detectors, such as a laser leg, monocular/depth body and monocular face detector. The tracker was fully integrated with the REEM robot software through 
+<a href="http://www.ros.org" target="_blank"><b>ROS</b></a>, 
+and it was also used at RoboCup@Home'14 competition with
+<a href="http://www.salleurl.edu/WCM_Front/Final/Final/_0BTnejnhqPWNPyTZUV8nQDFeMZ7jdZSB9K8EokRc7LZpgVcCkByE3JHnMcO5NLwS6reWSz8OLeq5i0vc961cppnSEoRIYxgan0dTdxtCEKtlNlTBkMlmJg" target="_blank"><b>La Salle Robotics Team</b></a>.
+
+<br>
+<br>
+Robocup contest is composed by a set of tests in a home environment aiming to boost the development of mobile robotics solutions at home environment to help humans to common daily tasks. 
+<br>
+<br>
+Beta Robots developed a real-time, multi-target, people tracker. The goal is to estimate the position of the 
+people around the robot while keeping consistency of the identity of each person. This process is a basic process 
+for a robot expecting to interact with humans around it, as it is a basic perception capability of human beings, for both interaction and saftey.
+The solution was fully integrated to run in the 
+<a href="http://www.pal-robotics.com/en/robots/reem" target="_blank"><b>REEM</b></a> robot 
+through <a href="http://www.ros.org" target="_blank"><b>ROS</b></a>, 
+and was used (with worthy success!) during the Robocup@home events held in Eindhoven (2013) and Joao Pessoa (2014).
+<br>
+<br>
+The approach was based on <b>particle filtering</b>, fusing wheel odometry and four different detectors: laser scanner leg detector, monocular visual body detector, monocular visual face detector and depth image body detector. The approach is completely ready to incorporate detections from new detectors by just designing a likleihood function. 
+
+Next figure shows the diagram of the implemented approach.
+<br>
+<br>
+<figure style=font-size:17px;>
+      <img style="width: 700px; display: block; margin-left: auto; margin-right: auto" src="images/peopleTrackerDiagram.png">
+      <figcaption>
+      <b>Figure 1.</b> Process diagram of the people tracker task. Grey boxes represent processes related to hardware sensor
+      acquisition, while yellow boxes represent perception processes. 
+      </figcaption>
+</figure>
+Detector provide detections at different rates and in an asynchronously way, and covenring different field of views. Moreover, each detector has false positive and false negative events, and detectors did not provide identity.
+<br>
+<br>
+The approach is based in two main steps, the first one is <b>data association</b> and the second one is <b>filtering</b>.
+Data association wants to relate detections with targets that are already identified and allocated by the tracker. 
+After data association, if some detections remain unassociated, the approach launches a new target, 
+assigning a new id. 
+Filtering is implemented by keeping a <a href="http://en.wikipedia.org/wiki/Particle_filter" target="_blank"><b>particle filter</b></a> 
+for each target. Target state space is (x,y,vx,vy), that is 2D location and 2D velocities. Leg, face and body3D detections correct both (x,y) components, while body2D detections correct only the target bearing.
+<br>
+<br>
+Some temptatives were done by introducing some parameterization of the target appearance to the state space using, for instance, 
+color histograms, but the experiments did not provide robust solutions, specially due to background clutter. 
+<br>
+<br>
+<a href="http://www.youtube.com/watch?v=MAFhN3ZPT7I" target="_blank"><b>Here</b></a> you can see a video where the robot
+was tracking three persons that crosses between them, while it keeps quite robustly the id of each one. 
+<!-- <iframe width="420" height="315" src="http://www.youtube.com/embed/MAFhN3ZPT7I?rel=0" frameborder="0" allowfullscreen></iframe> -->
+<br>
+<br>
+<a href="http://www.youtube.com/watch?v=qd3SzjP9D48" target="_blank"><b>This</b></a> video shows the follow me test done by the 
+REEM robot during the robocup@home competition held in Enidhoven in June 2013. The video shows how the robot was 
+able to track a person , after some occlusions caused by other people, and even a crossing event. The robots ended entering in a lift with the person it was following.
+<br>
+<br>
+And finally, in the next picture you will find a good instance of a false positive body2D detection while debugging the tracker 
+in the PAL robotics facilities. The body visual detector got confused by detecting another robot as a person!
+<figure style=font-size:16px;>
+      <img style="width: 800px; display: block; margin-left: auto; margin-right: auto" src="images/falsePositive.png">
+      <figcaption><b>Figure 2.</b> A nice false positive provided by the body visual detector.</figcaption>
+</figure>
+<br>
+</div>
+
+<div id="footer">
+<ul>
+  <li style="text-align: left;">
+        <img style="width: 32px; height: 32px; float: left" src="images/mail-icon-2.png">
+        info(at)beta-robots.com 
+  </li>
+  <li style="text-align: right;"> 
+<!--    <a href="https://github.com/beta-robots" target="_blank" float="left"> beta-robots</a> -->
+<!--    <img style="width: 67px; height:25px; " src="web/images/github_logo.png"> -->
+        <a href="https://github.com/beta-robots" target="_blank" float="left"> 
+            <img style="width: 67px; height:25px; " src="images/github_logo.png">
+        </a>      
+<!--    <a href="https://twitter.com/btRobots" target="_blank" float="left"> @btRobots</a> -->
+<!--    <img style="width: 30px; height:30px; float: right" src="web/images/twitter-bird-light-bgs.png"> -->
+        <a href="https://twitter.com/btRobots" target="_blank" float="left">
+            <img style="width: 30px; height:30px; float: right" src="images/twitter-bird-light-bgs.png">
+        </a>
+  </li>
+</ul>
+</div>
+
+</div>
+</div>
+
+
+
+</body>
+</html>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46601430-1', 'beta-robots.com');
+  ga('send', 'pageview');
+
+</script>
